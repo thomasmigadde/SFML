@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build SFML Game",
+            "type": "shell",
+            "command": "g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-ID:\\SCHOOL\\SFML-3.0.2\\include",
+                "-LD:\\SCHOOL\\SFML-3.0.2\\lib",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                "-std=c++17",
+                "-static-libgcc",
+                "-static-libstdc++"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compile SFML C++ file"
+        }
+    ]
+}

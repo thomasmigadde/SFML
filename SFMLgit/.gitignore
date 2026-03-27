@@ -1,0 +1,8 @@
+*.exe
+*.dll
+output/
+SFML/
+.vscode/
+*.obj
+*.o
+
