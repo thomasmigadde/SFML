@@ -15,7 +15,7 @@ int main() {
     Texture sadt, cutet;
     
     if(!sadt.loadFromFile("images (12).jfif")) {  // Fixed: added space
-        std::cerr << "Failed to load sad emoji" << std::endl;
+        std::cerr << "Failed to load emoji" << std::endl;
     }
     sad.setTexture(&sadt);
     
