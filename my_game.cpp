@@ -28,45 +28,23 @@ int main() {
     window.setFramerateLimit(60);
 
     while (window.isOpen()) {
-        // Event handling
-        while (auto event = window.pollEvent()) {
-            if (event->is<sf::Event::Closed>()) {
+    sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
                 window.close();
-            }
-            if (const auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
-                switch (keyEvent->code) {
-                    case sf::Keyboard::Key::Escape:
-                        window.close();
-                        break;
-                        
-                    case sf::Keyboard::Key::Left:
-                        cute.move(-10, 0);
-                        break;
-                        
-                    case sf::Keyboard::Key::Right:
-                        cute.move(10, 0);
-                        break;
-                        
-                    case sf::Keyboard::Key::Up:
-                        cute.move(0, -10);
-                        break;
-                        
-                    case sf::Keyboard::Key::Down:
-                        cute.move(0, 9);
-                        break;
-                        
-                    default:
-                        break;
-                }
-            }
         }
 
-        // Rendering - CORRECT ORDER:
-        window.clear(sf::Color::Black);   // Clear first
-        window.draw(sad);                 // Draw sad emoji
-        window.draw(cute);                // Draw cute emoji
-        window.display();                 // Display last
-    }
+        // Continuous input handling
+        if (Keyboard::isKeyPressed(Keyboard::Left))  cute.move({-5.f, 0.f});
+        if (Keyboard::isKeyPressed(Keyboard::Right)) cute.move({5.f, 0.f});
+        if (Keyboard::isKeyPressed(Keyboard::Up))    cute.move({0.f, -5.f});
+        if (Keyboard::isKeyPressed(Keyboard::Down))  cute.move({0.f, 5.f});
 
-    return 0;
+        // Rendering
+        window.clear(sf::Color::Black);
+        window.draw(sad);
+        window.draw(cute);
+        window.display();
+    }
+ return 0;
 }
