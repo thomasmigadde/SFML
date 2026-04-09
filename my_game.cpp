@@ -52,7 +52,7 @@ int main() {
                         break;
                         
                     case sf::Keyboard::Key::Down:
-                        cute.move(0, 10);
+                        cute.move(0, 9);
                         break;
                         
                     default:
