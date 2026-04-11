@@ -2,51 +2,29 @@
 using namespace sf;
 
 int main() {
-    RenderWindow window(VideoMode(800, 600), "SFML 3.0 Window");
+    RenderWindow window(VideoMode(800, 600), "SFML Syntax Example");
+    window.setFramerateLimit(60);
 
     Texture texture;
-    if (!texture.loadFromFile("image.png")) {
-        return -1; // fail if image not found
+    if (!texture.loadFromFile("cute_image.jpg")) {  // Using available image
+        return -1;
     }
-
     Sprite sprite(texture);
-    sprite.setPosition(100, 100);
+    sprite.setPosition(100.f, 100.f);
 
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed)
+            if (event.type == Event::Closed) {
                 window.close();
+            }
         }
 
-        window.clear();
-        window.draw(sprite); // draw something!
+        window.clear(Color::Black);
+        window.draw(sprite);
         window.display();
     }
+
+    return 0;
 }
 
-/*
-sf::Texture texture;
-texture.loadFromFile("image.png");
-
-sf::Sprite sprite(texture);
-sprite.setPosition(100, 100);
-
-window.clear();
-window.draw(sprite);
-window.display();
-
-sf::Texture texture;
-texture.loadFromFile("image.png");
-
-sf::Sprite sprite(texture);
-sprite.setPosition(100, 100);
-
-window.clear();
-window.draw(sprite);
-window.display();
-
-
-sf::TcpSocket socket;
-socket.connect("127.0.0.1", 53000);
-*/
