@@ -3,18 +3,17 @@
 ## Completed Steps
 - [x] Commit 1: Create .gitignore (ignore binaries, DLLs, output/, images/)
 - [x] Commit 2: Update TODO.md with this 10-commit plan
-- [x] Commit 3: Improve my_game.cpp (add collision score with SFML Text display) - console for now
+- [x] Commit 3: Improve my_game.cpp (add collision score with console output, bounds)
+- [x] Commit 4: Refactor main.cpp (standard event loop, error checks, framerate)
+- [x] Commit 5: Clean syntax.cpp (remove comments, framerate, style)
+- [x] Commit 6: Enhance try_game.cpp (WASD+arrows, error checks)
 
-## Pending Steps (Mark [x] as completed)
-- [ ] Commit 4: Refactor main.cpp (fix event loop to standard while(pollEvent()), add error checks)
-- [ ] Commit 5: Clean syntax.cpp (remove redundant comments, add framerate limit)
-- [ ] Commit 6: Enhance try_game.cpp (add WASD controls, graphical score)
-- [ ] Commit 7: Create unified game.cpp merging best features (emoji game + score + audio?)
-- [ ] Commit 8: Update .vscode/tasks.json (add build task for g++)
-- [ ] Commit 9: Create README.md (build/run instructions, controls)
-- [ ] Commit 10: Final cleanup (git log verify), optional push
+## Pending Steps
+- [ ] Commit 7: Create unified game.cpp (merge emoji collision game with score)
+- [ ] Commit 8: Update .vscode/tasks.json (add g++ build task)
+- [ ] Commit 9: Create README.md (instructions, controls)
+- [ ] Commit 10: Final TODO update, git log verify 10 commits
 
 ## Followup
-- Test: g++ *.cpp -o game.exe -I SFML/include -L SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-- git log --oneline (aim 10 new commits)
+- Compile test: g++ -std=c++17 game.cpp -o game.exe (link SFML libs)
 
