@@ -1,0 +1,28 @@
+# Binaries
+*.exe
+*.dll
+*.o
+*.obj
+*.lib
+
+# Build outputs
+output/
+build/
+*.exe.dSYM/
+
+# Dependencies
+SFML/
+SFMLgit/
+
+# Images/Assets (optional, for repo cleanliness)
+*.jpg
+*.jpeg
+*.jfif
+*.png
+*.gif
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
