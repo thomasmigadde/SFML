@@ -3,8 +3,14 @@
 #include <iostream>
 #include <cstdlib>
 #include <optional>
+#include <random>
 
 using namespace sf;
+
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_real_distribution<float> disX(50.f, 750.f);
+std::uniform_real_distribution<float> disY(50.f, 550.f);
 
 sf::Font font;
 sf::Text scoreText(font, "Score: 0", 24);
@@ -74,7 +80,7 @@ int main() {
             score++;
             scoreText.setString("Score: " + std::to_string(score));
             cute.setPosition({100.f, 100.f});
-            sad.setPosition({static_cast<float>(rand() % 700 + 50), static_cast<float>(rand() % 500 + 50)});
+            sad.setPosition({disX(gen), disY(gen)});
         }
 
         Vector2f pos = cute.getPosition();
