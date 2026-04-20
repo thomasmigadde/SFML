@@ -28,6 +28,16 @@ struct FallingObject
         active = true;
     }
 
+    //update function to move the object downwards
+    void update(){
+        if(active){
+            sprite.move({0.f,speed});
+            if(sprite.getPosition().y > 600.f){
+                active = false;
+            }
+        }
+    }
+
 //draw if active
     void draw(RenderWindow& window) {
         if (active) {
