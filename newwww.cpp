@@ -7,10 +7,13 @@
 
 using namespace sf;
 
+
+
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_real_distribution<float> disX(50.f, 750.f);
 std::uniform_real_distribution<float> disY(50.f, 550.f);
+std::uniform_int_distribution<int> disSpeed(1, 5);
 
 sf::Font font;
 sf::Text scoreText(font, "Score: 0", 24);
@@ -81,6 +84,7 @@ int main() {
             scoreText.setString("Score: " + std::to_string(score));
             cute.setPosition({100.f, 100.f});
             sad.setPosition({disX(gen), disY(gen)});
+            sad.move({disSpeed(gen), disSpeed(gen)});
         }
 
         Vector2f pos = cute.getPosition();
