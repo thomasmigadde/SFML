@@ -6,9 +6,20 @@
 
 using namespace sf;
 
+sf::Font font;
+sf::Text scoreText(font, "Score: 0", 24);
+
+void init() {
+    if(!font.openFromFile("C:\\Users\\User\\Desktop\\SFML\\fonts.ttf")){
+        throw std::runtime_error("Failed to load font");
+    }
+    scoreText.setFillColor(Color::White);
+    scoreText.setPosition({10.f, 10.f});
+}
+
 int main() {
     RenderWindow window(VideoMode({800u, 600u}), "SFML Emoji Game");
-
+ 
     CircleShape sad(50.f);
     sad.setPosition({375.f, 275.f});
 
@@ -25,6 +36,7 @@ int main() {
         std::cerr << "Failed to load sadie.png" << std::endl;
         return 1;
     }
+  
     cute.setTexture(&cutie);
     sad.setTexture(&sadie);
 
@@ -32,8 +44,10 @@ int main() {
     sf::Sprite sadieSprite(sadie);
 
     window.setFramerateLimit(60);
-
+    
+    init();
     int score = 0;
+
 
     while (window.isOpen()) {
         std::optional<Event> eventOpt;
@@ -58,7 +72,7 @@ int main() {
 
         if (cute.getGlobalBounds().findIntersection(sad.getGlobalBounds()).has_value()) {
             score++;
-            std::cout << "Score: " << score << std::endl;
+            scoreText.setString("Score: " + std::to_string(score));
             cute.setPosition({100.f, 100.f});
             sad.setPosition({static_cast<float>(rand() % 700 + 50), static_cast<float>(rand() % 500 + 50)});
         }
@@ -73,6 +87,7 @@ int main() {
         window.clear(Color::Black);
         window.draw(sad);
         window.draw(cute);
+        window.draw(scoreText);
         window.display();
     }
     return 0;
