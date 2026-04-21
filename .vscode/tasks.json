@@ -7,6 +7,9 @@
             "command": "g++",
             "args": [
                 "-g",
+              //  "${file}\\${relativeFile}",
+              // "${workplaceFolder}",
+               // "GAME/*.cpp",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.exe",

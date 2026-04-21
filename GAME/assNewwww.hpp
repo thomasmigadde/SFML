@@ -58,12 +58,13 @@ int main()
         sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Emoji Game");
         FallingObject obj;
         sf::Texture cutie;
-        obj.sprite = new Sprite(cutie);
+        
         
         if(!cutie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images1.jfif")) {
             std::cerr << "Failed to load cutie.png" << std::endl;
             return 1;
         }
+        obj.sprite = new Sprite(cutie);
        // Sprite cutieSprite(cutie);
         //obj.sprite -> setTexture(cutie);
         window.setFramerateLimit(60);
@@ -79,6 +80,9 @@ int main()
                 }
                
                 window.clear(sf::Color::Black);
+                if(!obj.active){
+                    obj.spawn(gen);
+                }
                 obj.update();
                 obj.draw(window);
                 window.display();
