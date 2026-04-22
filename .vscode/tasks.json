@@ -15,6 +15,7 @@
                 "${fileDirname}/${fileBasenameNoExtension}.exe",
                 "-I",
                 "D:/SCHOOL/SFML-3.0.2/include",
+                "-I", "C:/Users/User/Desktop/SFML/GAME",
                 "-L",
                 "D:/SCHOOL/SFML-3.0.2/lib",
                 "-lsfml-graphics",

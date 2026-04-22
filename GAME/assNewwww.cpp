@@ -19,16 +19,17 @@ struct FallingObject
 
 // Constructor to initialize the object
     FallingObject() :sprite(nullptr), speed(0.f), x(0.f), active(false) {}
-    ~FallingObject() {
+   /* ~FallingObject() {
         delete sprite;
     }  
+        */
 //spawn function to set random position and speed
     void spawn(std::mt19937& gen) {
         std::uniform_real_distribution<float> disX(50.f, 750.f);
         std::uniform_int_distribution<int> disSpeed(1, 5);
         x = disX(gen);
         speed = disSpeed(gen);
-        sprite->setPosition(Vector2f(x, -sprite->getGlobalBounds().position.y));
+        sprite->setPosition(Vector2f(x, -50.f));
         //sprite.setPosition(sf::Vector2(x, -sprite.getGlobalBounds().position.y));
         active = true;
     }
@@ -55,7 +56,7 @@ struct FallingObject
 
 int main()
 {
-        sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Emoji Game");
+        sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Falling Emoji Game");
         FallingObject obj;
         sf::Texture cutie;
         
@@ -64,7 +65,7 @@ int main()
             std::cerr << "Failed to load cutie.png" << std::endl;
             return 1;
         }
-        obj.sprite = new Sprite(cutie);
+        obj.sprite = std::make_unique<Sprite>(cutie);
        // Sprite cutieSprite(cutie);
         //obj.sprite -> setTexture(cutie);
         window.setFramerateLimit(60);
@@ -79,16 +80,16 @@ int main()
                     window.close();
                 }
                
-                window.clear(sf::Color::Black);
-                if(!obj.active){
-                    obj.spawn(gen);
-                }
-                obj.update();
-                obj.draw(window);
-                window.display();
-                
-    
+              }
+              
+            window.clear(sf::Color::Black);
+            if(!obj.active){
+                obj.spawn(gen);
             }
+            //window.clear(sf::Color::Black);
+            obj.update();
+            obj.draw(window);
+            window.display();
         }
   return 0;       
 }
