@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <optional>
+#include <memory>
 #include <random>
 using namespace sf;
 using namespace std;
@@ -9,9 +10,9 @@ using namespace std;
 
 struct FallingObject
 {
-    Sprite* sprite;
+    //Sprite* sprite;
     //Sprite sprite;
-    unique_ptr<Sprite> spritePtr;
+    unique_ptr<Sprite> sprite;
     float speed;
     float x; 
     bool active;
@@ -56,6 +57,7 @@ struct FallingObject
 
 int main()
 {
+    try{
         sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Falling Emoji Game");
         FallingObject obj;
         sf::Texture cutie;
@@ -91,5 +93,12 @@ int main()
             obj.draw(window);
             window.display();
         }
+    } 
+    catch (const std::exception& e) { 
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+    catch (...) {
+        std::cerr << "Unknown exception occurred." << std::endl;
+    }
   return 0;       
 }
