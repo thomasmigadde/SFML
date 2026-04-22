@@ -3,7 +3,10 @@
 #include <iostream>
 using namespace sf;
 
+// SFML 2.0x
 int main() {
+    /*
+     
     RenderWindow window(VideoMode(800, 600), "SFML Main Template");
     window.setFramerateLimit(60);
 
@@ -43,6 +46,7 @@ int main() {
         window.draw(text);
         window.display();
     }
+        */
     return 0;
 }
 
