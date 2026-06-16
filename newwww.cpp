@@ -78,6 +78,16 @@ int main() {
 
 
     while (window.isOpen()) {
+         if(SpawnTimer.getElapsedTime().asSeconds() > SpawnInterval)
+            {
+                FallingObject obj;
+                obj.cute = std::make_unique<CircleShape>(30.f);
+            // Sprite cutieSprite(cutie);
+                obj.cute -> setTexture(&cutie);
+                obj.spawn(gen);
+                objects.push_back(std::move(obj));
+                SpawnTimer.restart();
+            }
         std::optional<Event> eventOpt;
         while ((eventOpt = window.pollEvent())) {
             if (eventOpt->is<Event::Closed>()) {
