@@ -20,6 +20,7 @@ std::uniform_int_distribution<int> disSpeed(1, 5);
 
 sf::Font font;
 sf::Text scoreText(font, "Score: 0", 24);
+sf::Text failureText(font ,"Failure: 0", 24);
 
 void init() {
     if(!font.openFromFile("C:\\Users\\User\\Desktop\\SFML\\fonts.ttf")){
@@ -27,7 +28,10 @@ void init() {
     }
     scoreText.setFillColor(Color::White);
     scoreText.setPosition({10.f, 10.f});
+    failureText.setFillColor(Color::White);
+    failureText.setPosition({10.f, 40.f});
 }
+
 
 int main() {
     
@@ -75,6 +79,7 @@ int main() {
     
     init();
     int score = 0;
+    int failure = 0;
 
 
     while (window.isOpen()) {
@@ -96,6 +101,8 @@ int main() {
         }
         for(int i = static_cast<int>(objects.size()) - 1; i >= 0; --i){
                 if(objects[i].cute && objects[i].cute->getPosition().y > 600.f){
+                    failure++;
+                    failureText.setString("Failure: " + std::to_string(failure));
                     objects.erase(objects.begin() + i);
                 }
             
@@ -147,6 +154,7 @@ int main() {
      
         window.draw(cute);
         window.draw(scoreText);
+        window.draw(failureText);
         window.display();
     }
     return 0;
