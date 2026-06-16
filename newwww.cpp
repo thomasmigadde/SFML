@@ -100,7 +100,7 @@ int main() {
                 }
             
             }  
-            window.clear(sf::Color::Black);
+            //window.clear(sf::Color::Black);
 
         if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
             cute.move({-5.f, 0.f});
@@ -114,15 +114,20 @@ int main() {
         if (Keyboard::isKeyPressed(Keyboard::Key::S)) {
             cute.move({0.f, 5.f});
         }
-
-        if (cute.getGlobalBounds().findIntersection(sad.getGlobalBounds()).has_value()) {
-            score++;
-            scoreText.setString("Score: " + std::to_string(score));
-            cute.setPosition({100.f, 100.f});
-            sad.setPosition({disX(gen), disY(gen)});
-            sad.move({static_cast<float>(disSpeed(gen)), static_cast<float>(disSpeed(gen))});
+        for(auto& ob:objects)
+         {if(ob.active)
+            {
+                if (cute.getGlobalBounds().findIntersection(ob.cute->getGlobalBounds()).has_value()) {
+                    score++;
+                    scoreText.setString("Score: " + std::to_string(score));
+                    cute.setPosition({100.f, 100.f});
+                    ob.cute->setPosition({disX(gen), disY(gen)});
+                    ob.cute->move({static_cast<float>(disSpeed(gen)), static_cast<float>(disSpeed(gen))});
+                    ob.active = false;
+                }
+            }
         }
-
+       
         Vector2f pos = cute.getPosition();
         Rect<float> bounds = cute.getGlobalBounds();
         if (pos.x < 0.f) cute.setPosition({0.f, pos.y});
@@ -139,7 +144,7 @@ int main() {
             for(auto& obj : objects){
                 obj.draw(window);
             }
-        window.draw(sad);
+     
         window.draw(cute);
         window.draw(scoreText);
         window.display();
