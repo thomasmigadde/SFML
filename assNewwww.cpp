@@ -12,7 +12,7 @@ using namespace std;
 
 
 
-int main()
+int create()
 {
     try{
         sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Falling Emoji Game");

@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <optional>
 #include <random>
+#include <C:\Users\User\Desktop\SFML\assNewwww.cpp>
 
 
 using namespace sf;
@@ -29,7 +30,23 @@ void init() {
 }
 
 int main() {
+    
     RenderWindow window(VideoMode({800u, 600u}), "SFML Emoji Game");
+
+     std::vector<FallingObject> objects;
+        sf::Texture cutie;
+        
+        //spawn timer
+        sf::Clock SpawnTimer;
+        const float SpawnInterval = 1.0f;
+        
+        window.setFramerateLimit(60);
+        std::mt19937 gen(std::random_device{}());
+        if(!cutie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images1.jfif")) {
+                std::cerr << "Failed to load cutie.png" << std::endl;
+                return 1;
+            }
+
  
     CircleShape sad(50.f);
     sad.setPosition({375.f, 275.f});
@@ -43,10 +60,10 @@ int main() {
         return 1;
     }
    
-    if(!sadie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
-        std::cerr << "Failed to load sadie.png" << std::endl;
-        return 1;
-    }
+    //if(!sadie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
+        //std::cerr << "Failed to load sadie.png" << std::endl;
+        //return 1;
+   // }
   
     cute.setTexture(&cutie);
     sad.setTexture(&sadie);
@@ -86,7 +103,7 @@ int main() {
             scoreText.setString("Score: " + std::to_string(score));
             cute.setPosition({100.f, 100.f});
             sad.setPosition({disX(gen), disY(gen)});
-            sad.move({disSpeed(gen), disSpeed(gen)});
+            sad.move({static_cast<float>(disSpeed(gen)), static_cast<float>(disSpeed(gen))});
         }
 
         Vector2f pos = cute.getPosition();
