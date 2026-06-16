@@ -21,6 +21,7 @@ std::uniform_int_distribution<int> disSpeed(1, 5);
 sf::Font font;
 sf::Text scoreText(font, "Score: 0", 24);
 sf::Text failureText(font ,"Failure: 0", 24);
+sf::Text gameOverText(font, "GAME OVER, YOU HAVE MORE THAN 100 FAILURES", 24);
 
 void init() {
     if(!font.openFromFile("C:\\Users\\User\\Desktop\\SFML\\fonts.ttf")){
@@ -29,7 +30,9 @@ void init() {
     scoreText.setFillColor(Color::White);
     scoreText.setPosition({10.f, 10.f});
     failureText.setFillColor(Color::White);
-    failureText.setPosition({10.f, 40.f});
+    failureText.setPosition({670.f, 10.f});
+    gameOverText.setFillColor(Color::Red);
+    gameOverText.setPosition({100.f, 250.f});
 }
 
 
@@ -80,9 +83,12 @@ int main() {
     init();
     int score = 0;
     int failure = 0;
+    bool gameOver = false;
 
 
     while (window.isOpen()) {
+
+       if(!gameOver){
          if(SpawnTimer.getElapsedTime().asSeconds() > SpawnInterval)
             {
                 FallingObject obj;
@@ -122,7 +128,8 @@ int main() {
             cute.move({0.f, 5.f});
         }
         for(auto& ob:objects)
-         {if(ob.active)
+         {
+            if(ob.active)
             {
                 if (cute.getGlobalBounds().findIntersection(ob.cute->getGlobalBounds()).has_value()) {
                     score++;
@@ -142,12 +149,23 @@ int main() {
         if (pos.x + bounds.size.x > 800.f) cute.setPosition({800.f - bounds.size.x, pos.y});
         if (pos.y + bounds.size.y > 600.f) cute.setPosition({pos.x, 600.f - bounds.size.y});
 
+
         window.clear(Color::Black);
          for(auto& ob : objects){
                  if(ob.active){
                     ob.update();
                 };
                 }
+
+
+    }    
+
+        if(failure > 100 && !gameOver){
+            gameOver = true;
+           
+        }
+        
+        
             for(auto& obj : objects){
                 obj.draw(window);
             }
@@ -155,7 +173,17 @@ int main() {
         window.draw(cute);
         window.draw(scoreText);
         window.draw(failureText);
+        if(gameOver){
+            window.draw(gameOverText);
+
+            if(Keyboard::isKeyPressed(Keyboard::Key::Escape)  || Keyboard::isKeyPressed(Keyboard::Key::Enter)){
+                window.close();
+            }
+        }
+        
         window.display();
+        
+        
     }
     return 0;
 }
