@@ -34,7 +34,7 @@ int main() {
     RenderWindow window(VideoMode({800u, 600u}), "SFML Emoji Game");
 
      std::vector<FallingObject> objects;
-        sf::Texture cutie;
+        sf::Texture cutiee;
         
         //spawn timer
         sf::Clock SpawnTimer;
@@ -42,7 +42,7 @@ int main() {
         
         window.setFramerateLimit(60);
         std::mt19937 gen(std::random_device{}());
-        if(!cutie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images1.jfif")) {
+        if(!cutiee.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
                 std::cerr << "Failed to load cutie.png" << std::endl;
                 return 1;
             }
@@ -60,10 +60,10 @@ int main() {
         return 1;
     }
    
-    //if(!sadie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
-        //std::cerr << "Failed to load sadie.png" << std::endl;
-        //return 1;
-   // }
+    if(!sadie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
+        std::cerr << "Failed to load sadie.png" << std::endl;
+        return 1;
+    }
   
     cute.setTexture(&cutie);
     sad.setTexture(&sadie);
