@@ -48,8 +48,8 @@ int main() {
             }
 
  
-    CircleShape sad(50.f);
-    sad.setPosition({375.f, 275.f});
+   // CircleShape sad(50.f);
+   // sad.setPosition({375.f, 275.f});
 
     CircleShape cute(50.f);
     cute.setPosition({100.f, 100.f});
@@ -59,17 +59,17 @@ int main() {
         std::cerr << "Failed to load cutie.png" << std::endl;
         return 1;
     }
-   
+   /*
     if(!sadie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images.jfif")) {
         std::cerr << "Failed to load sadie.png" << std::endl;
         return 1;
     }
-  
+  */
     cute.setTexture(&cutie);
-    sad.setTexture(&sadie);
+   // sad.setTexture(&sadie);
 
     sf::Sprite cutieSprite(cutie);
-    sf::Sprite sadieSprite(sadie);
+    //sf::Sprite sadieSprite(sadie);
 
     window.setFramerateLimit(60);
     
@@ -94,6 +94,13 @@ int main() {
                 window.close();
             }
         }
+        for(int i = static_cast<int>(objects.size()) - 1; i >= 0; --i){
+                if(objects[i].cute && objects[i].cute->getPosition().y > 600.f){
+                    objects.erase(objects.begin() + i);
+                }
+            
+            }  
+            window.clear(sf::Color::Black);
 
         if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
             cute.move({-5.f, 0.f});
@@ -124,6 +131,14 @@ int main() {
         if (pos.y + bounds.size.y > 600.f) cute.setPosition({pos.x, 600.f - bounds.size.y});
 
         window.clear(Color::Black);
+         for(auto& ob : objects){
+                 if(ob.active){
+                    ob.update();
+                };
+                }
+            for(auto& obj : objects){
+                obj.draw(window);
+            }
         window.draw(sad);
         window.draw(cute);
         window.draw(scoreText);
