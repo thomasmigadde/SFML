@@ -18,10 +18,12 @@ std::uniform_real_distribution<float> disX(50.f, 750.f);
 std::uniform_real_distribution<float> disY(50.f, 550.f);
 std::uniform_int_distribution<int> disSpeed(1, 5);
 
+sf::RectangleShape button({200.f, 50.f});
 sf::Font font;
 sf::Text scoreText(font, "Score: 0", 24);
 sf::Text failureText(font ,"Failure: 0", 24);
 sf::Text gameOverText(font, "GAME OVER, YOU HAVE MORE THAN 100 FAILURES", 24);
+sf::Text startOverText(font, "Start Over", 24);
 
 void init() {
     if(!font.openFromFile("C:\\Users\\User\\Desktop\\SFML\\fonts.ttf")){
@@ -33,6 +35,10 @@ void init() {
     failureText.setPosition({670.f, 10.f});
     gameOverText.setFillColor(Color::Red);
     gameOverText.setPosition({100.f, 250.f});
+    startOverText.setFillColor(Color::White);
+    startOverText.setPosition({110.f, 120.f});
+    button.setFillColor(Color::Blue);
+    button.setPosition({100.f, 100.f});
 }
 
 
@@ -160,8 +166,22 @@ int main() {
 
     }    
 
-        if(failure > 100 && !gameOver){
+        if(failure > 300 && !gameOver){
             gameOver = true;
+        } 
+        else if(gameOver){
+            objects.clear();
+            sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+            if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+                if(button.globalbounds().contains(mousePos.x , mousePos.y)){
+                    gameOver = false;
+                    score = 0;
+                    failure = 0;
+                    scoreText.setString("Score: 0");
+                    failureText.setString("Failure: 0");
+
+                }
+            }
            
         }
         
