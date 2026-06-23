@@ -33,12 +33,12 @@ void init() {
     scoreText.setPosition({10.f, 10.f});
     failureText.setFillColor(Color::White);
     failureText.setPosition({670.f, 10.f});
-    gameOverText.setFillColor(Color::Red);
+    gameOverText.setFillColor(Color::White);
     gameOverText.setPosition({100.f, 250.f});
     startOverText.setFillColor(Color::White);
-    startOverText.setPosition({110.f, 120.f});
-    button.setFillColor(Color::Blue);
-    button.setPosition({100.f, 100.f});
+    startOverText.setPosition({320.f, 220.f});
+    button.setFillColor(Color::Green);
+    button.setPosition({280.f, 200.f});
 }
 
 
@@ -63,9 +63,15 @@ int main() {
  
    // CircleShape sad(50.f);
    // sad.setPosition({375.f, 275.f});
+    
+    uniform_real_distribution<float> disXX(50.f, 600.f);
+    uniform_real_distribution<float> disYY(50.f, 600.f);
+    
+    float x = disXX(gen);
+    float y = disYY(gen);
 
     CircleShape cute(50.f);
-    cute.setPosition({100.f, 100.f});
+    cute.setPosition({100.f, 150.f});
 
     sf::Texture cutie, sadie;
     if(!cutie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images1.jfif")) {
@@ -140,7 +146,7 @@ int main() {
                 if (cute.getGlobalBounds().findIntersection(ob.cute->getGlobalBounds()).has_value()) {
                     score++;
                     scoreText.setString("Score: " + std::to_string(score));
-                    cute.setPosition({100.f, 100.f});
+                    cute.setPosition({x, y});
                     ob.cute->setPosition({disX(gen), disY(gen)});
                     ob.cute->move({static_cast<float>(disSpeed(gen)), static_cast<float>(disSpeed(gen))});
                     ob.active = false;
@@ -165,25 +171,26 @@ int main() {
 
 
     }    
-
-        if(failure > 300 && !gameOver){
-            gameOver = true;
-        } 
-        else if(gameOver){
-            objects.clear();
+       
+        if(failure > 100 && !gameOver){
+           
+       
+            
+                //objects.clear();
+                //window.clear(Color::Black);
+                //gameOver = true;
+                   
+            }
+            
+            /*
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-            if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
-                if(button.globalbounds().contains(mousePos.x , mousePos.y)){
-                    gameOver = false;
-                    score = 0;
-                    failure = 0;
-                    scoreText.setString("Score: 0");
-                    failureText.setString("Failure: 0");
+            if(type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){
+                
 
                 }
             }
-           
-        }
+           */
+        
         
         
             for(auto& obj : objects){
@@ -193,12 +200,30 @@ int main() {
         window.draw(cute);
         window.draw(scoreText);
         window.draw(failureText);
-        if(gameOver){
+        if(failure > 100 && !gameOver){
+            objects.clear();
+            //cute.clear();
             window.draw(gameOverText);
+            window.draw(button);
+            window.draw(startOverText);
+      
+             sf::Vector2i mousePos = sf::Mouse::getPosition(window);  
+                    
+                    if(button.getGlobalBounds().contains(sf::Vector2f(mousePos)) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+                        gameOver = false;
+                        score = 0;
+                        failure = 0;
+                        scoreText.setString("Score: 0");
+                        failureText.setString("Failure: 0");
 
+                    
+                  
+                  
+            }
             if(Keyboard::isKeyPressed(Keyboard::Key::Escape)  || Keyboard::isKeyPressed(Keyboard::Key::Enter)){
                 window.close();
             }
+            
         }
         
         window.display();

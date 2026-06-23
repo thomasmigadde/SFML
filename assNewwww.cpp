@@ -17,7 +17,7 @@ int create()
     try{
         sf::RenderWindow window(sf::VideoMode({800u, 600u}), "SFML Falling Emoji Game");
         std::vector<FallingObject> objects;
-        sf::Texture cutie;
+        sf::Texture cutie, sad;
         
         //spawn timer
         sf::Clock SpawnTimer;
