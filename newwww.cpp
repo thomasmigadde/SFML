@@ -71,7 +71,7 @@ int main() {
     float y = disYY(gen);
 
     CircleShape cute(50.f);
-    cute.setPosition({100.f, 150.f});
+    cute.setPosition({x, y});
 
     sf::Texture cutie, sadie;
     if(!cutie.loadFromFile("C:\\Users\\User\\Desktop\\SFML\\images1.jfif")) {
@@ -146,6 +146,10 @@ int main() {
                 if (cute.getGlobalBounds().findIntersection(ob.cute->getGlobalBounds()).has_value()) {
                     score++;
                     scoreText.setString("Score: " + std::to_string(score));
+
+                    float x = disX(gen);
+                    float y = disY(gen);
+                    
                     cute.setPosition({x, y});
                     ob.cute->setPosition({disX(gen), disY(gen)});
                     ob.cute->move({static_cast<float>(disSpeed(gen)), static_cast<float>(disSpeed(gen))});
